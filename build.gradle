@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+group 'io.github.ken3122.snowflake-id-plugin'
+version '0.1'
+
+def withoutBom = {
+    exclude group: 'org.apache.jmeter', module: 'bom'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation 'de.mkammerer.snowflake-id:snowflake-id:0.0.2'
+    implementation 'org.apache.jmeter:ApacheJMeter_core:5.5', withoutBom
+    implementation 'org.apache.jmeter:ApacheJMeter_java:5.5', withoutBom
+}
+
+test {
+    useJUnitPlatform()
+}
