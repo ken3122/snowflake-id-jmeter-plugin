@@ -2,6 +2,17 @@ plugins {
     id 'java'
 }
 
+task copyLibs(type: Copy) {
+    from configurations.runtimeClasspath {
+        exclude group: "org.apache.jmeter"
+    }
+    into rootProject.layout.buildDirectory.dir("lib")
+}
+
+jar {
+    destinationDirectory = rootProject.layout.buildDirectory.dir("lib/ext")
+}
+
 group 'io.github.ken3122.snowflake-id-plugin'
 version '0.1'
 
@@ -24,3 +35,5 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+assemble.finalizedBy(copyLibs)
