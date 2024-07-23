@@ -1,5 +1,5 @@
 # snowflake-id-jmeter-plugin
-Jmeter plugin that adds a function to generate unique snowflake ids (64-bit integer). Based on https://github.com/phxql/snowflake-id implementation. 
+Jmeter plugin that adds a function to generate unique snowflake ids (64-bit integer). Depends on https://github.com/phxql/snowflake-id library. 
 ## How to build and install
 Build project using `./gradlew clean build`,
 then copy jars from `build/lib` to `lib` and from `build/lib/ext` to `lib/ext` in jmeter directory respectively.
