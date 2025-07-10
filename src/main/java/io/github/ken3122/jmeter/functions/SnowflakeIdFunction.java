@@ -6,6 +6,7 @@ import org.apache.jmeter.functions.AbstractFunction;
 import org.apache.jmeter.functions.InvalidVariableException;
 import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
+import org.apache.jmeter.threads.JMeterVariables;
 import org.apache.jmeter.util.JMeterUtils;
 
 import java.util.ArrayList;
@@ -23,17 +24,25 @@ public class SnowflakeIdFunction extends AbstractFunction {
                     JMeterUtils.getPropDefault("snowflake_generator_id", 0)
             );
 
+    private boolean hexFormat = false;
+
     public SnowflakeIdFunction() {
     }
 
     @Override
     public String execute(SampleResult previousResult, Sampler currentSampler) throws InvalidVariableException {
+        if (hexFormat) {
+           return Long.toHexString(snowflakeIdGenerator.next());
+        }
         return Long.toString(snowflakeIdGenerator.next());
     }
 
     @Override
     public void setParameters(Collection<CompoundVariable> parameters) throws InvalidVariableException {
-        checkParameterCount(parameters, 0, 0);
+        checkParameterCount(parameters, 0, 1);
+        if (parameters.size() > 0){
+            hexFormat = true;
+        }
     }
 
     @Override
